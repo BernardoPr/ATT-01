@@ -1,0 +1,26 @@
+# Arquivos Java compilados
+*.class
+*.jar
+*.war
+*.ear
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.iml
+
+# Arquivos de saída gerados
+imagem/output/*.png
+gift/*.gif
+
+# Logs
+*.log
+
+# Diretórios de build
+build/
+target/
+bin/
