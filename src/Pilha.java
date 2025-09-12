@@ -14,22 +14,14 @@ public class Pilha<T> {
         }
     }
 
-    private No<T> topo; // Referência para o nó no topo da pilha
+    private No<T> topo;
     private int tamanho;
 
-    /**
-     * Constrói uma pilha vazia.
-     */
     public Pilha() {
         this.topo = null;
         this.tamanho = 0;
     }
 
-    /**
-     * Adiciona um elemento no topo da pilha.
-     *
-     * @param elemento o elemento a ser adicionado.
-     */
     public void empilhar(T elemento) {
         No<T> novoNo = new No<>(elemento);
         if (!vazia()) {
