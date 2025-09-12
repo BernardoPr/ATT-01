@@ -101,21 +101,21 @@ public class Main {
         
         int y = -1;
         while (true) {
-            System.out.print("Escolha um ponto Y (0 a " + (img.getHeight()-1) + "): ");
+            System.out.print("Escolha um ponto Y (0 a " + (img.getHeight()) + "): ");
             if (sc.hasNextInt()) {
                 y = sc.nextInt();
-                sc.nextLine(); // Limpa buffer
+                sc.nextLine();
             } else {
                 System.out.println("Coordenada Y inválida!");
-                sc.nextLine(); // Limpa entrada inválida
+                sc.nextLine();
                 continue;
             }
             
             if (y < 0 || y >= img.getHeight()) {
-                System.out.println("Coordenada Y inválida! Deve estar entre 0 e " + (img.getHeight()-1));
+                System.out.println("Coordenada Y inválida! Deve estar entre 0 e " + (img.getHeight()));
                 continue;
             } else {
-                break; // Coordenada Y válida, sai do loop
+                break;
             }
         }
         
@@ -129,6 +129,7 @@ public class Main {
         System.out.println("1 - Vermelho");
         System.out.println("2 - Azul");
         System.out.println("3 - Verde");
+        System.out.println("4 - RGB personalizado");
         System.out.print("Opção: ");
         int corEscolhida = -1;
         if (sc.hasNextInt()) {
@@ -144,17 +145,60 @@ public class Main {
         if (corEscolhida == 1) fillColor = Color.RED;
         else if (corEscolhida == 2) fillColor = Color.BLUE;
         else if (corEscolhida == 3) fillColor = Color.GREEN;
+        else if (corEscolhida == 4) {
+            // RGB personalizado
+            int r = -1, g = -1, b = -1;
+            limparTerminal();
+            while (true) {
+                System.out.print("Digite o valor R (0-255): ");
+                if (sc.hasNextInt()) {
+                    r = sc.nextInt();
+                    if (r >= 0 && r <= 255) break;
+                    else System.out.println("Valor deve estar entre 0 e 255!");
+                } else {
+                    System.out.println("Digite um número válido!");
+                    sc.nextLine();
+                }
+            }
+            
+            while (true) {
+                System.out.print("Digite o valor G (0-255): ");
+                if (sc.hasNextInt()) {
+                    g = sc.nextInt();
+                    if (g >= 0 && g <= 255) break;
+                    else System.out.println("Valor deve estar entre 0 e 255!");
+                } else {
+                    System.out.println("Digite um número válido!");
+                    sc.nextLine();
+                }
+            }
+            
+            while (true) {
+                System.out.print("Digite o valor B (0-255): ");
+                if (sc.hasNextInt()) {
+                    b = sc.nextInt();
+                    sc.nextLine();
+                    if (b >= 0 && b <= 255) break;
+                    else System.out.println("Valor deve estar entre 0 e 255!");
+                } else {
+                    System.out.println("Digite um número válido!");
+                    sc.nextLine();
+                }
+            }
+            
+            fillColor = new Color(r, g, b);
+            System.out.println("Cor personalizada: RGB(" + r + ", " + g + ", " + b + ")");
+        }
         else {
-            System.out.println("Cor inválida! Usando verde como padrão.");
+            System.out.println("Opção inválida! Usando verde como padrão.");
             fillColor = Color.GREEN;
         }
         
         System.out.println("Colorindo...");
         String outputDir = "imagem/output";
-        int step = 100; // salva a cada 100 pixels coloridos
+        int step = 100;
         FloodFill.fill(img, x, y, targetColor, fillColor, step, outputDir, metodo);
-        
-        // Usar ArrayList do Java para compatibilidade com GifGenerator
+      
         java.util.List<String> imagens = new java.util.ArrayList<>();
         File[] outputFiles = new File(outputDir).listFiles();
         if (outputFiles != null) {
