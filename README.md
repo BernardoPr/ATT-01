@@ -48,6 +48,7 @@ gift/                   # GIFs gerados
    ```
 
 3. **Usar o sistema:**
+3. **Usar o sistema:**
    - Coloque suas imagens na pasta `imagem/input`
    - Escolha o método (Fila ou Pilha)
    - Selecione a imagem
