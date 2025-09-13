@@ -18,10 +18,10 @@ public class FloodFill {
                 Ponto p = fila.desenfileirar();
                 int px = p.x, py = p.y;
                 if (px < 0 || py < 0 || px >= width || py >= height) continue;
-                if (visited[py][px]) continue; // [y][x]
+                if (visited[py][px]) continue;
                 if (new Color(img.getRGB(px, py)).equals(targetColor)) {
                     img.setRGB(px, py, fillColor.getRGB());
-                    visited[py][px] = true; // [y][x]
+                    visited[py][px] = true;
                     count++;
                     if (count % step == 0) {
                         ImageIO.write(img, "png", new File(outputDir + "/step_" + count + ".png"));
@@ -32,7 +32,7 @@ public class FloodFill {
                     fila.enfileirar(new Ponto(px, py-1));
                 }
             }
-        } else { // Pilha (profundidade)
+        } else {
             Pilha<Ponto> pilha = new Pilha<>();
             pilha.empilhar(new Ponto(x, y));
             while (!pilha.vazia()) {
@@ -44,6 +44,9 @@ public class FloodFill {
                     img.setRGB(px, py, fillColor.getRGB());
                     visited[py][px] = true;
                     count++;
+                    if (count == 1000) {
+                        System.out.println("1000 pixels coloridos...");
+                    }
                     if (count % step == 0) {
                         ImageIO.write(img, "png", new File(outputDir + "/step_" + count + ".png"));
                     }
