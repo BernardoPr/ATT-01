@@ -63,7 +63,9 @@ public class Fila<T> {
         return tamanho;
     }
 
- 
+    /**
+     * Dobra a capacidade da fila, reorganizando os elementos em um novo array linear.
+     */
     @SuppressWarnings("unchecked")
     private void redimensionar() {
         int novaCapacidade = capacidade * 2;
