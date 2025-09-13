@@ -198,66 +198,11 @@ public class Main {
         String outputDir = "imagem/output";
         int step = 100;
         FloodFill.fill(img, x, y, targetColor, fillColor, step, outputDir, metodo);
-      
-        ArrayList<String> imagens = new ArrayList<>();
-        File[] outputFiles = new File(outputDir).listFiles();
-        if (outputFiles != null) {
-            for (File f : outputFiles) {
-                if (f.getName().startsWith("step_") && f.getName().endsWith(".png")) {
-                    imagens.add(f.getPath());
-                }
-            }
-        }
-        sortImagePaths(imagens);
         
-        String gifPath = "gift/" + arquivos[escolha].getName().replaceAll("\\..*", "") + ".gif";
-        GifGenerator.createGif(imagens, gifPath);
-        System.out.println("Disponível em " + gifPath);
+        System.out.println("Processo de flood fill concluído!");
+        System.out.println("Imagens salvas em: " + outputDir);
         
         sc.close();
-    }
-    
-    /**
-     * Ordena os caminhos das imagens numericamente
-     * @param imagens lista de caminhos de imagens para ordenar
-     */
-    private static void sortImagePaths(ArrayList<String> imagens) {
-        // Implementação simples de bubble sort para ordenar os caminhos das imagens
-        int n = imagens.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                String path1 = imagens.get(j);
-                String path2 = imagens.get(j + 1);
-                
-                // Extrai o número do step_ do nome do arquivo
-                int num1 = extractStepNumber(path1);
-                int num2 = extractStepNumber(path2);
-                
-                if (num1 > num2) {
-                    // Troca as posições
-                    String temp = imagens.get(j);
-                    imagens.set(j, imagens.get(j + 1));
-                    imagens.set(j + 1, temp);
-                }
-            }
-        }
-    }
-    
-    /**
-     * Extrai o número do step do nome do arquivo
-     * @param path caminho do arquivo
-     * @return número do step
-     */
-    private static int extractStepNumber(String path) {
-        try {
-            // Extrai o nome do arquivo do caminho completo
-            String fileName = new File(path).getName();
-            // Remove "step_" do início e ".png" do final
-            String numberStr = fileName.substring(5, fileName.length() - 4);
-            return Integer.parseInt(numberStr);
-        } catch (Exception e) {
-            return 0; // Retorna 0 se não conseguir extrair o número
-        }
     }
     
     private static void limparTerminal() {
